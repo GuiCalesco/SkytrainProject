@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="10dp"
         android:text="TextView" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="TextView" />
 
     <MultiAutoCompleteTextView
@@ -47,9 +47,8 @@
         android:id="@+id/multiAutoCompleteTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/multiAutoCompleteTextView1"
         android:layout_below="@+id/multiAutoCompleteTextView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="To" />
 
@@ -59,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/multiAutoCompleteTextView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:text="Search" />
 
 </RelativeLayout>
