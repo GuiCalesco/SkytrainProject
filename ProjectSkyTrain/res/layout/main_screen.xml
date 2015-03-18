@@ -11,6 +11,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/skytrain1bk"
     tools:context="com.example.ex.MainActivity" >
 
     <TextView
@@ -59,6 +60,8 @@
         android:layout_below="@+id/multiAutoCompleteTextView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:background="@drawable/button1"
+        android:textColor="#FFFFFF"
         android:text="Search" />
 
 </RelativeLayout>
