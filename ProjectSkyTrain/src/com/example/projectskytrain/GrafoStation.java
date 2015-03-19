@@ -7,13 +7,12 @@ public class GrafoStation{
 		public int from;  
 	 };
 	
-	public static LinkedList<Integer> shortestPath(int [][] grafo, int n, int origin, int destiny){
+	public static int shortestPath(int [][] grafo, int n, int origin, int destiny, LinkedList<Integer> path){
 
 		Member[] dis = new Member[n];
 		int index = 0;
 		LinkedList<Integer> list = new LinkedList<Integer>();
-		LinkedList<Integer> path;
-		 
+		
 		 initiateArray(dis,n);
 		 dis[origin].distance=0;
 		 dis[origin].from=origin;
@@ -45,13 +44,10 @@ public class GrafoStation{
 		 	
 		 	index++;
 		 }
-		 /*
-		 if(dis[destiny].distance!=-1)
-			System.out.println(dis[destiny].distance);*/
-			
+		 
 		path = getPath(dis,origin,destiny);
 		
-		return path;
+		return dis[destiny].distance;
 	}
 	
 	private static void initiateArray(Member[] arr, int n){
