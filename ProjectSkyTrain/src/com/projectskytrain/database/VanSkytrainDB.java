@@ -1,16 +1,16 @@
-package com.example.projectskytrain;
+package com.projectskytrain.database;
 
-import com.example.projectskytrain.VanSkyTrainDBContract.BusDB;
-import com.example.projectskytrain.VanSkyTrainDBContract.BusStationDB;
-import com.example.projectskytrain.VanSkyTrainDBContract.StationDB;
+import com.projectskytrain.constants.Station;
+import com.projectskytrain.database.VanSkyTrainDBContract.BusDB;
+import com.projectskytrain.database.VanSkyTrainDBContract.BusStationDB;
+import com.projectskytrain.database.VanSkyTrainDBContract.StationDB;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 public class VanSkytrainDB extends SQLiteOpenHelper {
 	
@@ -46,6 +46,17 @@ public class VanSkytrainDB extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
+		createTables(db);
+		insertData(db);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	private void createTables(SQLiteDatabase db){
 		try{
 			db.execSQL(SQL_CREATE_TABLE_STATION);
 			db.execSQL(SQL_CREATE_TABLE_BUS);
@@ -55,11 +66,19 @@ public class VanSkytrainDB extends SQLiteOpenHelper {
 			Log.d("database", ex.getMessage());
 		}
 	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// TODO Auto-generated method stub
-
+	
+	private void insertData(SQLiteDatabase db){
+		
+		for (Station station : Station.values()) {
+			
+			ContentValues values = new ContentValues();
+			values.put(StationDB.COLUMN_ID, station.getCode());
+			values.put(StationDB.COLUMN_NAME, station.getName());
+			values.put(StationDB.COLUMN_LINE, station.getLine());
+			values.put(StationDB.COLUMN_ZONE, station.getZone());
+			
+			db.insert(StationDB.TABLE_NAME, null, values);
+		}
 	}
 
 }

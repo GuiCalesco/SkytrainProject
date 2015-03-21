@@ -1,4 +1,4 @@
-package com.example.projectskytrain;
+package com.projectskytrain.auxiliry;
 import java.util.*;
 public class GrafoStation{
 	static class Member

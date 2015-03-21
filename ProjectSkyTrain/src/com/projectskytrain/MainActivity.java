@@ -1,7 +1,9 @@
-package com.example.projectskytrain;
+package com.projectskytrain;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.example.projectskytrain.R;
 
 import android.app.Activity;
 import android.content.Intent;

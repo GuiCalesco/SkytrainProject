@@ -1,4 +1,7 @@
-package com.example.projectskytrain;
+package com.projectskytrain;
+
+import com.example.projectskytrain.R;
+import com.projectskytrain.database.VanSkytrainDB;
 
 import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;

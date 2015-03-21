@@ -1,4 +1,4 @@
-package com.example.projectskytrain;
+package com.projectskytrain.database;
 
 import android.provider.BaseColumns;
 
