@@ -3,7 +3,6 @@ package com.example.projectskytrain;
 import android.provider.BaseColumns;
 
 public final class VanSkyTrainDBContract {
-	public static final String DB_NAME = "van_sky_db";
 	
 	public VanSkyTrainDBContract(){
 		
