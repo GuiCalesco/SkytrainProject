@@ -45,7 +45,7 @@ public class GrafoStation{
 		 	index++;
 		 }
 		 
-		path = getPath(dis,origin,destiny);
+		//path = getPath(dis,origin,destiny);
 		
 		return dis[destiny].distance;
 	}

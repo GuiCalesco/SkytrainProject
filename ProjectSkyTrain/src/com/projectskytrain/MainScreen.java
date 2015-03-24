@@ -1,6 +1,7 @@
 package com.projectskytrain;
 
 import com.example.projectskytrain.R;
+import com.projectskytrain.auxiliry.Station;
 import com.projectskytrain.constants.StationEnum;
 import com.projectskytrain.database.VanSkytrainDB;
 
@@ -31,30 +32,48 @@ public class MainScreen extends Activity {
 	
 		ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,stnNames);
-		 final AutoCompleteTextView fromStation = (AutoCompleteTextView)findViewById(R.id.txtFrom);
-		 final AutoCompleteTextView toStation = (AutoCompleteTextView)findViewById(R.id.txtTo);
-		// final TextView test = (TextView)findViewById(R.id.textView1);
-		 Button search = (Button)findViewById(R.id.btnSearch);
+		final AutoCompleteTextView fromStation = (AutoCompleteTextView)findViewById(R.id.txtFrom);
+		final AutoCompleteTextView toStation = (AutoCompleteTextView)findViewById(R.id.txtTo);
+		final TextView time = (TextView)findViewById(R.id.txtTime);
+		final TextView price = (TextView)findViewById(R.id.txtPrice);
+		fromStation.setAdapter(adapter);
+        toStation.setAdapter(adapter);
+		Button search = (Button)findViewById(R.id.btnSearch);
+		
+		 
 		 
 		 search.setOnClickListener(new OnClickListener() {
 		
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//test.setText(toStation.getEditableText().toString());
+				final String fromStn=fromStation.getEditableText().toString();
+				final String toStn=toStation.getEditableText().toString();
+				calculate(fromStn, toStn);
 			}
 		}) ;
-		 
-		 fromStation.setAdapter(adapter);
-         toStation.setAdapter(adapter);
-         
-         
-        
-
+		        
 
 	}
+	
+	private void calculate(String st1, String st2){
+		int stCode1, stCode2;
+		Station calcStn= new Station(); 
+		
+		stCode1 = Station.getStationId(st1);
+		stCode2 = Station.getStationId(st2);
+		if(stCode1!=-1 && stCode2!=-1){
+			Toast.makeText(this, "Time: "+calcStn.getTimeAndPath(stCode1, stCode2), Toast.LENGTH_LONG).show();
+		}else{
+			Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
+		}
+		
+		
+		
+		
+		
+	}
 
-	public void getStation( String [] arr){
+	private void getStation( String [] arr){
 		
 		int count=0;
 		for (StationEnum var : StationEnum.values()) {

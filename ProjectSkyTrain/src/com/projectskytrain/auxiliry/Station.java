@@ -19,7 +19,7 @@ public class Station {
 		int id = -1;
 		
 		for (StationEnum var : StationEnum.values()) {
-			if(var.getName().equalsIgnoreCase(stationName)){
+			if(var.getName().equals(stationName)){
 				id = var.getCode();
 				break;
 			}
