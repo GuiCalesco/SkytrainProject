@@ -14,28 +14,8 @@
     android:background="@drawable/skytrain1bk"
     tools:context="com.example.ex.MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textColor="#ffffff" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="10dp"
-        android:text="TextView"
-        android:textColor="#ffffff" />
-
-    <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView1"
+    <AutoCompleteTextView
+        android:id="@+id/txtFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -45,27 +25,47 @@
         android:textColor="#ffffff" >
 
         <requestFocus />
-    </MultiAutoCompleteTextView>
-
-    <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/multiAutoCompleteTextView1"
-        android:layout_below="@+id/multiAutoCompleteTextView1"
-        android:ems="10"
-        android:hint="To"
-        android:textColor="#ffffff" />
+    </AutoCompleteTextView>
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/multiAutoCompleteTextView2"
+        android:layout_below="@+id/txtFrom"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="46dp"
         android:background="@drawable/button1"
-        android:textColor="#FFFFFF"
-        android:text="Search" />
+        android:text="Search"
+        android:textColor="#FFFFFF" />
+
+    <AutoCompleteTextView
+        android:id="@+id/txtTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtFrom"
+        android:layout_below="@+id/txtFrom"
+        android:ems="10"
+        android:hint="To"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="54dp"
+        android:text="TextView"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

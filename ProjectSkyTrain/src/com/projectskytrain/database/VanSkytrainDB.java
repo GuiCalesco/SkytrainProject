@@ -1,6 +1,6 @@
 package com.projectskytrain.database;
 
-import com.projectskytrain.constants.Station;
+import com.projectskytrain.constants.StationEnum;
 import com.projectskytrain.database.VanSkyTrainDBContract.BusDB;
 import com.projectskytrain.database.VanSkyTrainDBContract.BusStationDB;
 import com.projectskytrain.database.VanSkyTrainDBContract.StationDB;
@@ -69,7 +69,7 @@ public class VanSkytrainDB extends SQLiteOpenHelper {
 	
 	private void insertData(SQLiteDatabase db){
 		
-		for (Station station : Station.values()) {
+		for (StationEnum station : StationEnum.values()) {
 			
 			ContentValues values = new ContentValues();
 			values.put(StationDB.COLUMN_ID, station.getCode());

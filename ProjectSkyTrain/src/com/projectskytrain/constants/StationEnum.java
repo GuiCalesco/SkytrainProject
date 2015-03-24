@@ -1,13 +1,13 @@
 package com.projectskytrain.constants;
 
-public enum Station{
+public enum StationEnum{
 	
 	WATERFRONT(0, "Waterfront", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
 	BURRARD(1, "Burrard", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1), 
 	GRANVILLE(2, "Granville", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
 	STADION_CHINATOWN(3, "Station-Chinatown", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
 	MAIN_STREET_SCIENCE_WORLD(4, "Main Street-Science World", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
-	COMMERCIAL_BROADWAY_1(5, "Comercial-Broadway", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
+	COMMERCIAL_BROADWAY_1(5, "Commercial-Broadway", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
 	NANAIMO(6, "Nanaimo", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
 	TWENTY_NINETH_AVENUE(7, "29th Avenue", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
 	JOYCE_COLLINGWOOD(8, "Joyce-Collingwood", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1),
@@ -33,7 +33,7 @@ public enum Station{
 	GILMORE(28,"Gilmore", Line.MILLENNIUM_LINE, Zone.ZONE_2),
 	RUPERT(29,"Rupert", Line.MILLENNIUM_LINE, Zone.ZONE_1),
 	RENFREW(30,"Renfrew", Line.MILLENNIUM_LINE, Zone.ZONE_1),
-	COMERCIAL_BROADWAY_2(31,"Comercial - Broadway 2", Line.MILLENNIUM_LINE, Zone.ZONE_1),
+	COMMERCIAL_BROADWAY_2(31,"Commercial - Broadway (Millennium Line)", Line.MILLENNIUM_LINE, Zone.ZONE_1),
 	VCC_CLARK(32,"VCC - Clark", Line.MILLENNIUM_LINE, Zone.ZONE_1),
 	WATERFRONT_CANADA_LINE(33,"Waterfront Canada Line", Line.CANADA_LINE, Zone.ZONE_1),
 	VANCOUVER_CITY_CENTRE(34,"Vancouver City Centre", Line.CANADA_LINE, Zone.ZONE_1),
@@ -64,7 +64,7 @@ public enum Station{
     private int line;
     private int zone;
 
-    private Station(int code, String name, int line, int zone) {
+    private StationEnum(int code, String name, int line, int zone) {
             this.code = code;
             this.name = name;
             this.line = line;
