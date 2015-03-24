@@ -19,12 +19,15 @@ import android.widget.Toast;
 
 public class MainScreen extends Activity {
 	String[] stnNames = new String[56];
+	 TextView timetxt;
+	 TextView pricetxt;
 
 	
 	@Override
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		
 		getStation(stnNames);
 		super.onCreate(savedInstanceState);
 		createDataBase();
@@ -34,21 +37,28 @@ public class MainScreen extends Activity {
                 android.R.layout.simple_dropdown_item_1line,stnNames);
 		final AutoCompleteTextView fromStation = (AutoCompleteTextView)findViewById(R.id.txtFrom);
 		final AutoCompleteTextView toStation = (AutoCompleteTextView)findViewById(R.id.txtTo);
-		final TextView time = (TextView)findViewById(R.id.txtTime);
-		final TextView price = (TextView)findViewById(R.id.txtPrice);
+		timetxt = (TextView)findViewById(R.id.txtTime);
+		pricetxt = (TextView)findViewById(R.id.txtPrice);
+		
 		fromStation.setAdapter(adapter);
         toStation.setAdapter(adapter);
 		Button search = (Button)findViewById(R.id.btnSearch);
 		
-		 
+		timetxt.setText("Time:");
+		pricetxt.setText("Price:");
 		 
 		 search.setOnClickListener(new OnClickListener() {
 		
 			@Override
 			public void onClick(View v) {
+				int time;
 				final String fromStn=fromStation.getEditableText().toString();
 				final String toStn=toStation.getEditableText().toString();
 				calculate(fromStn, toStn);
+				
+					
+				
+				
 			}
 		}) ;
 		        
@@ -57,20 +67,17 @@ public class MainScreen extends Activity {
 	
 	private void calculate(String st1, String st2){
 		int stCode1, stCode2;
-		Station calcStn= new Station(); 
-		
+		Station calcStn= new Station();
 		stCode1 = Station.getStationId(st1);
 		stCode2 = Station.getStationId(st2);
 		if(stCode1!=-1 && stCode2!=-1){
-			Toast.makeText(this, "Time: "+calcStn.getTimeAndPath(stCode1, stCode2), Toast.LENGTH_LONG).show();
+			timetxt.setText("Time: "+calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
+			pricetxt.setText("Price: $"+calcStn.getPrice());
 		}else{
-			Toast.makeText(this, "error", Toast.LENGTH_LONG).show();
+			
 		}
 		
-		
-		
-		
-		
+			
 	}
 
 	private void getStation( String [] arr){
