@@ -28,7 +28,7 @@
     </AutoCompleteTextView>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtFrom"
@@ -52,9 +52,9 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="40dp"
+        android:layout_alignLeft="@+id/txtTo"
+        android:layout_below="@+id/btnSearch"
+        android:layout_marginTop="21dp"
         android:text="TextView"
         android:textColor="#ffffff" />
 
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textColor="#ffffff" />
 
