@@ -6,8 +6,13 @@ public class GrafoStation{
 		public int distance; 
 		public int from;  
 	 };
+	 
+	 LinkedList<Integer> path;
 	
-	public static int shortestPath(int [][] grafo, int n, int origin, int destiny, LinkedList<Integer> path){
+	 public GrafoStation(){
+		
+	 }
+	public int shortestPath(int [][] grafo, int n, int origin, int destiny){
 
 		Member[] dis = new Member[n];
 		int index = 0;
@@ -45,7 +50,7 @@ public class GrafoStation{
 		 	index++;
 		 }
 		 
-		//path = getPath(dis,origin,destiny);
+		path = getPath(dis,origin,destiny);
 		
 		return dis[destiny].distance;
 	}
@@ -60,21 +65,21 @@ public class GrafoStation{
 
 	}
 	
-	private static void printArray(Member[] arr, int n){
+	private void printArray(Member[] arr, int n){
 		for(int i = 0; i < n; i++){
 			System.out.print("From: "+arr[i].from+" - Dist: "+arr[i].distance+"/ ");
 		}
 		System.out.println("");
 	}
 	
-	private static void printList(LinkedList<Integer> list){
+	private void printList(LinkedList<Integer> list){
 		for(int i = 0; i < list.size(); i++)
 			System.out.print(list.get(i)+"- ");
 			
 		System.out.println("");
 	}
 	
-	private static LinkedList<Integer> getPath(Member[] arr, int origin, int destiny){
+	private  LinkedList<Integer> getPath(Member[] arr, int origin, int destiny){
 	
 		LinkedList<Integer> path = new LinkedList<Integer>();
 		
@@ -87,6 +92,10 @@ public class GrafoStation{
 		printList(path);
 		return path;
 		
+	}
+	
+	public  LinkedList<Integer> getPath(){
+		return path;
 	}
 	
 } 

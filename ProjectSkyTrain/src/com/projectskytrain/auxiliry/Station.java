@@ -101,7 +101,9 @@ public class Station {
 	}
 	
 	public int getTimeAndPath(int stnCode1, int stnCode2){
-		return GrafoStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2, path);
+		GrafoStation gStation = new GrafoStation();
+		path = gStation.getPath();
+		return gStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2);
 	}
 	
 	public ArrayList<StationEnum> getPath(){
