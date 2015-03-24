@@ -1,6 +1,9 @@
 package com.projectskytrain.auxiliry;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+
+import android.support.v4.app.INotificationSideChannel.Stub;
 
 import com.projectskytrain.constants.StationEnum;
 
@@ -100,6 +103,44 @@ public class Station {
 	public int getTimeAndPath(int stnCode1, int stnCode2){
 		return GrafoStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2, path);
 	}
+	
+	public ArrayList<StationEnum> getPath(){
+			ArrayList<StationEnum> list = new ArrayList<StationEnum>();
+			for (int var : path) {
+				list.add(getStationInfo(var));
+			}
+			
+			return list;
+	}
+	
+	public double getPrice(){
+		double price = 0.0;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for (int var : path) {
+			StationEnum station = getStationInfo(var);
+			if(!list.contains(station.getZone())){
+				list.add(station.getZone());
+			}
+		}
+		
+		switch (list.size()) {
+		case 0:
+			price = 0.0;
+			break;
+		case 1:
+			price = 4.0;
+			break;
+		case 2:
+			price = 5.50;
+			break;
+		default:
+			price = 0;
+			break;
+		}
+		
+		return price;
+	} 
 	
 	
 	
