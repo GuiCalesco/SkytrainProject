@@ -13,6 +13,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/skytrain1bk"
     tools:context="com.example.ex.MainActivity" >
+    
+   
+ 
 
     <AutoCompleteTextView
         android:id="@+id/txtFrom"
@@ -66,5 +69,12 @@
         android:layout_below="@+id/txtTime"
         android:text="TextView"
         android:textColor="#ffffff" />
+    
+     <ListView 
+        
+    	android:id="@+id/listview"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@+id/txtPrice" />
 
 </RelativeLayout>

@@ -1,7 +1,10 @@
 package com.projectskytrain;
 
+import java.util.ArrayList;
+
 import com.example.projectskytrain.R;
 import com.projectskytrain.auxiliry.Station;
+import com.projectskytrain.auxiliry.StationArrayAdapter;
 import com.projectskytrain.constants.StationEnum;
 import com.projectskytrain.database.VanSkytrainDB;
 
@@ -13,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +25,7 @@ public class MainScreen extends Activity {
 	String[] stnNames = new String[56];
 	 TextView timetxt;
 	 TextView pricetxt;
+	 
 
 	
 	@Override
@@ -73,6 +78,7 @@ public class MainScreen extends Activity {
 		if(stCode1!=-1 && stCode2!=-1){
 			timetxt.setText("Time: "+calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
 			pricetxt.setText("Price: $"+calcStn.getPrice());
+			setListView(calcStn.getPath());
 		}else{
 			
 		}
@@ -97,5 +103,13 @@ public class MainScreen extends Activity {
 	                }
 	            }).start();
 	}
+	private void setListView(ArrayList<StationEnum> route){
+		final ListView listStation = (ListView)findViewById(R.id.listview);
+		
+		final StationArrayAdapter adapter= new StationArrayAdapter(this, route);
+		listStation.setAdapter(adapter);
+		
+	}
+	
 
 }
