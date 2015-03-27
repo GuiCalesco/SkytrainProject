@@ -101,7 +101,11 @@ public class Station {
 	}
 	
 	public int getTimeAndPath(int stnCode1, int stnCode2){
-		return GrafoStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2, path);
+		GrafoStation gStation = new GrafoStation();
+		
+		int time = gStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2); 
+		path = gStation.getPath();
+		return time;
 	}
 	
 	public ArrayList<StationEnum> getPath(){
@@ -129,9 +133,12 @@ public class Station {
 			price = 0.0;
 			break;
 		case 1:
-			price = 4.0;
+			price = 2.75;
 			break;
 		case 2:
+			price = 4.00;
+			break;
+		case 3:
 			price = 5.50;
 			break;
 		default:
