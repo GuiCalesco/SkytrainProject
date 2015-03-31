@@ -39,19 +39,24 @@ public class StationArrayAdapter extends ArrayAdapter<StationEnum> {
 	    
 	    switch(stationLine){
 	    case Line.CANADA_LINE:
-	    	txtLine.setText("Canada Line");
+	    	txtLine.setText("");
+	    	txtLine.setCompoundDrawablesWithIntrinsicBounds( R.drawable.canada, 0, 0, 0);
 	    	break;
 	    case Line.EVERGREEN_LINE:
-	    	txtLine.setText("Evergreen");
+	    	txtLine.setText("");
+	    	txtLine.setCompoundDrawablesWithIntrinsicBounds( R.drawable.evergreen, 0, 0, 0);;
 	    	break;
 	    case Line.EXPO_AND_MILLENNIUM_LINE:
-	    	txtLine.setText("Expo and Millenium Line");
+	    	txtLine.setText("");
+	    	txtLine.setCompoundDrawablesWithIntrinsicBounds( R.drawable.expoandmille, 0, 0, 0);
 	    	break;
 	    case Line.EXPO_LINE:
-	    	txtLine.setText("Expo Line");
+	    	txtLine.setText("");
+	    	txtLine.setCompoundDrawablesWithIntrinsicBounds( R.drawable.expo, 0, 0, 0);
 	    	break;
 	    case Line.MILLENNIUM_LINE:
-	    	txtLine.setText("Millenium Line");
+	    	txtLine.setText("");
+	    	txtLine.setCompoundDrawablesWithIntrinsicBounds( R.drawable.millenium, 0, 0, 0);
 	    	break;
 	    }
 	    
