@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="1dp"
@@ -7,57 +8,81 @@
     android:layout_marginLeft="1dp"
     android:layout_marginRight="0dp"
     android:layout_marginTop="0dp"
+    android:background="@drawable/skytrain1bk"
+    android:orientation="vertical"
+    android:gravity="top"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/skytrain1bk"
     tools:context="com.example.ex.MainActivity" >
+
+    <LinearLayout 
+        android:id="@+id/LinearLayoutFrom"
+        android:layout_marginTop="0dp"
+    	android:layout_width="match_parent"
+   		android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+    	android:gravity="center">
+    	
+        <AutoCompleteTextView
+	        android:id="@+id/txtFrom"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:hint="From"
+	        android:layout_weight="2"
+	        android:textColor="#ffffff" >
+	
+	        <requestFocus />
+        </AutoCompleteTextView>
+
+        <CheckBox
+            android:id="@+id/cbClosest"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Closest Station" />
+        
+    </LinearLayout>
     
-   
- 
+     <LinearLayout 
+        android:id="@+id/LinearLayoutTo"
+    	android:layout_width="match_parent"
+   		android:layout_height="wrap_content"
+   		android:layout_marginTop="16dp"
+    	android:orientation="horizontal"
+    	android:gravity="center">
+        
+          <AutoCompleteTextView
+	        android:id="@+id/txtTo"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:ems="10"
+	        android:hint="To"
+	        android:layout_weight="2"
+	        android:textColor="#ffffff" />
 
-    <AutoCompleteTextView
-        android:id="@+id/txtFrom"
+	    <Button
+	        android:id="@+id/btnSearch"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button1"
+	        android:text="Search"
+	        android:layout_weight="1"
+	        android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+     <TextView
+        android:id="@+id/txtFromTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="From"
-        android:textColor="#ffffff" >
-
-        <requestFocus />
-    </AutoCompleteTextView>
-
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtFrom"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:background="@drawable/button1"
-        android:text="Search"
-        android:textColor="#FFFFFF" />
-
-    <AutoCompleteTextView
-        android:id="@+id/txtTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtFrom"
-        android:layout_below="@+id/txtFrom"
-        android:ems="10"
-        android:hint="To"
+        android:text=""
         android:textColor="#ffffff" />
-
     <TextView
         android:id="@+id/txtTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtTo"
-        android:layout_below="@+id/btnSearch"
-        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textColor="#ffffff" />
 
@@ -65,16 +90,12 @@
         android:id="@+id/txtPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtTime"
-        android:layout_below="@+id/txtTime"
         android:text="TextView"
         android:textColor="#ffffff" />
-    
-     <ListView 
-        
-    	android:id="@+id/listview"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:layout_below="@+id/txtPrice" />
 
-</RelativeLayout>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
