@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -81,7 +82,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 			public void onClick(View v) {
 				final String fromStn=fromStation.getEditableText().toString();
 				final String toStn=toStation.getEditableText().toString();
-				
+				hideKeyboard(v);
 				calculate(fromStn, toStn);
 				
 					
@@ -89,8 +90,28 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 				
 			}
 		}) ;
-		        
-
+		
+		 fromStation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				if(!hasFocus){
+					hideKeyboard(v);
+				}
+			}
+		});
+		 
+		 toStation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+				
+				@Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					// TODO Auto-generated method stub
+					if(!hasFocus){
+						hideKeyboard(v);
+					}
+				}
+			});
 	}
 	
 	private void calculate(String st1, String st2){
@@ -255,6 +276,13 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 		super.onResume();
 		checkPlayServices();
 	}
+	
+	public void hideKeyboard(View v){
+		InputMethodManager inputManager = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+		inputManager.hideSoftInputFromWindow(v.getWindowToken(),0);
+	}
+	
+	
 	
 
 }
