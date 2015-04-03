@@ -15,6 +15,7 @@ import com.projectskytrain.constants.StationEnum;
 import com.projectskytrain.database.VanSkytrainDB;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
@@ -72,6 +73,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 		fromStation.setAdapter(adapter);
         toStation.setAdapter(adapter);
 		Button search = (Button)findViewById(R.id.btnSearch);
+		Button seeMap= (Button)findViewById(R.id.btnMap);
 		
 		timetxt.setText("Time:");
 		pricetxt.setText("Price:");
@@ -91,6 +93,15 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 			}
 		}) ;
 		
+		seeMap.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(MainScreen.this, SkytrainLine.class));
+			}
+		});
+		 
 		 fromStation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			
 			@Override

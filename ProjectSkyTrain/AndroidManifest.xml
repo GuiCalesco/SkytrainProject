@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.projectskytrain.MainScreen"></activity>
+        <activity android:name="com.projectskytrain.SkytrainLine"></activity>
     </application>
 
 </manifest>
