@@ -27,18 +27,23 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainScreen extends Activity implements ConnectionCallbacks,        OnConnectionFailedListener {
+public class MainScreen extends Activity implements ConnectionCallbacks, OnConnectionFailedListener {
 	
 	 private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
 	 private String[] stnNames = new String[56];
 	 private TextView timetxt;
 	 private TextView pricetxt;
-	 private TextView fromTo;
+	 private TextView fromStn;
+	 private TextView toStn;
+	 private TextView lableFromStn;
+	 private TextView lableToStn;
 	 private CheckBox cbClosesteStn;
 	 private GoogleApiClient mGoogleApiClient;
 	 private double latitude;
@@ -53,7 +58,6 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 		
 		getStation(stnNames);
 		super.onCreate(savedInstanceState);
-		createDataBase();
 		setContentView(R.layout.main_screen);
 		
 		if (checkPlayServices()) {             
@@ -67,7 +71,10 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 		final AutoCompleteTextView toStation = (AutoCompleteTextView)findViewById(R.id.txtTo);
 		timetxt = (TextView)findViewById(R.id.txtTime);
 		pricetxt = (TextView)findViewById(R.id.txtPrice);
-		fromTo = (TextView)findViewById(R.id.txtFromTo);
+		fromStn = (TextView)findViewById(R.id.txtFromStn);
+		toStn = (TextView)findViewById(R.id.txtToStn);
+		lableFromStn = (TextView)findViewById(R.id.lableFrom);
+		lableToStn = (TextView)findViewById(R.id.lableTo);
 		cbClosesteStn = (CheckBox)findViewById(R.id.cbClosest);
 		
 		fromStation.setAdapter(adapter);
@@ -75,9 +82,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 		Button search = (Button)findViewById(R.id.btnSearch);
 		Button seeMap= (Button)findViewById(R.id.btnMap);
 		
-		timetxt.setText("Time:");
-		pricetxt.setText("Price:");
-		 
+		
 		 search.setOnClickListener(new OnClickListener() {
 		
 			@Override
@@ -86,9 +91,6 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 				final String toStn=toStation.getEditableText().toString();
 				hideKeyboard(v);
 				calculate(fromStn, toStn);
-				
-					
-				
 				
 			}
 		}) ;
@@ -123,6 +125,38 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 					}
 				}
 			});
+		 
+		 fromStation.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				fromStation.showDropDown();
+			}
+		});
+		 
+		 toStation.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					toStation.showDropDown();
+				}
+			});
+		 
+		 cbClosesteStn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked){
+					fromStation.setText("");
+					fromStation.setEnabled(false);
+				}
+				else
+					fromStation.setEnabled(true);
+			}
+		});
 	}
 	
 	private void calculate(String st1, String st2){
@@ -143,11 +177,14 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 		}else{
 			stCode1 = Station.getStationId(st1);	
 		}
-		fromTo.setText("From: "+st1+" To: "+st2);
+		lableFromStn.setText("From: ");
+		lableToStn.setText(" To: ");
+		fromStn.setText(st1);
+		toStn.setText(st2);
 		stCode2 = Station.getStationId(st2);
 		if(stCode1!=-1 && stCode2!=-1){
-			timetxt.setText("Time: "+calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
-			pricetxt.setText("Price: $"+calcStn.getPrice());
+			timetxt.setText(calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
+			pricetxt.setText("$"+calcStn.getPrice());
 			setListView(calcStn.getPath());
 		}else{
 			Toast.makeText(this, "No valid station was given", Toast.LENGTH_SHORT).show();
@@ -235,8 +272,8 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
     		return true;
     		        
 		} else {             
-			latitude = mLastLocation.getLatitude();            
-    		longitude = mLastLocation.getLongitude(); 
+			latitude = 0;            
+    		longitude = 0; 
     		return false;
 		}
 	}
@@ -258,11 +295,8 @@ public class MainScreen extends Activity implements ConnectionCallbacks,        
 	@Override
 	public void onConnected(Bundle arg0) {
 		// TODO Auto-generated method stub
-		if(setLocation()){
-			Toast.makeText(this,"OK", Toast.LENGTH_LONG).show();
-		}
-		else
-			Toast.makeText(this,"Error", Toast.LENGTH_LONG).show();
+		setLocation();
+			
 	}
 
 	@Override

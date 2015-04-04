@@ -23,7 +23,8 @@
         android:id="@+id/LinearLayoutFrom"
         android:layout_marginTop="0dp"
     	android:layout_width="match_parent"
-   		android:layout_height="wrap_content"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
     	android:orientation="horizontal"
     	android:gravity="center">
     	
@@ -45,14 +46,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Closest Station" />
+            android:text="Closest Station" 
+            android:textColor="#ffffff"/>
         
     </LinearLayout>
     
      <LinearLayout 
         android:id="@+id/LinearLayoutTo"
     	android:layout_width="match_parent"
-   		android:layout_height="wrap_content"
+   		android:layout_height="0dp"
+   		android:layout_weight="1"
    		android:layout_marginTop="16dp"
     	android:orientation="horizontal"
     	android:gravity="center">
@@ -76,39 +79,136 @@
 	        android:layout_weight="1"
 	        android:textColor="#FFFFFF" />
     </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LinearLayoutFromTo"
+    	android:layout_width="match_parent"
+   		android:layout_height="0dp"
+   		android:layout_weight="0.5"
+    	android:orientation="horizontal"
+    	android:gravity="left">
+	    
+         <TextView
+             android:id="@+id/lableFrom"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text=""
+             android:textColor="#ffffff"
+             android:textStyle="bold" />
+         
+          <TextView
+             android:id="@+id/txtFromStn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text=""
+             android:textColor="#ffffff"
+              />
+          
+          
+	    
+        </LinearLayout>
+		
+      <LinearLayout 
+        android:id="@+id/LinearLayoutFromTo2"
+    	android:layout_width="match_parent"
+   		android:layout_height="0dp"
+   		android:layout_weight="0.5"
+    	android:orientation="horizontal"
+    	android:gravity="left">
+	 
+          
+          <TextView
+             android:id="@+id/lableTo"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text=""
+             android:textColor="#ffffff"
+             android:textStyle="bold" />
+         
+          <TextView
+             android:id="@+id/txtToStn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text=""
+             android:textColor="#ffffff"
+             />
+	    
+        </LinearLayout>
+		<LinearLayout 
+	        android:id="@+id/LinearLayoutTime"
+	    	android:layout_width="match_parent"
+	   		android:layout_height="0dp"
+   			android:layout_weight="0.5"
+	    	android:orientation="horizontal"
+	    	android:gravity="left">
+          
+		      <TextView
+		        android:id="@+id/lableTime"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Time: "
+		        android:textStyle="bold"
+		        android:textColor="#ffffff" />
+		     <TextView
+		        android:id="@+id/txtTime"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text=""
+		        android:textColor="#ffffff" />
+          
+		</LinearLayout>
+     
+   		<LinearLayout 
+	        android:id="@+id/LinearLayoutPrice"
+	    	android:layout_width="match_parent"
+	   		android:layout_height="0dp"
+   			android:layout_weight="0.5"
+	    	android:orientation="horizontal"
+	    	android:gravity="left">
+		     
+   		     <TextView
+		        android:id="@+id/lablePrice"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Price: "
+		        android:textStyle="bold"
+		        android:textColor="#ffffff" />
+   		     <TextView
+		        android:id="@+id/txtPrice"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text=""
+		        android:textColor="#ffffff" />
+		     
+   	   </LinearLayout>
 
-     <TextView
-        android:id="@+id/txtFromTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#ffffff" />
-    <TextView
-        android:id="@+id/txtTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#ffffff" />
+	<LinearLayout 
+	        android:id="@+id/LinearLayoutList"
+	    	android:layout_width="match_parent"
+	   		android:layout_height="0dp"
+   			android:layout_weight="6"
+	    	android:orientation="horizontal"
+	    	android:gravity="left">   
 
-    <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#ffffff" />
-
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="fill_parent"
-        android:layout_height="174dp" />
-
-    <Button
-        android:id="@+id/btnMap"
-        android:layout_width="104dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/button2"
-        android:text="See Map" />
-
+	    <ListView
+	        android:id="@+id/listview"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" />
+	</LinearLayout>
+	
+	<LinearLayout 
+	        android:id="@+id/LinearLayoutMap"
+	    	android:layout_width="match_parent"
+	   		android:layout_height="0dp"
+   			android:layout_weight="1"
+   			android:paddingTop="3dp"
+	    	android:orientation="horizontal"
+	    	android:gravity="left">   
+	    <Button
+	        android:id="@+id/btnMap"
+	        android:layout_width="104dp"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/button2"
+	        android:text="See Map" />
+	</LinearLayout>
 </LinearLayout>
