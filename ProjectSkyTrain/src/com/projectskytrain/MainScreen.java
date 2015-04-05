@@ -12,7 +12,6 @@ import com.google.android.gms.location.LocationServices;
 import com.projectskytrain.auxiliry.Station;
 import com.projectskytrain.auxiliry.StationArrayAdapter;
 import com.projectskytrain.constants.StationEnum;
-import com.projectskytrain.database.VanSkytrainDB;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +22,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -44,6 +45,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 	 private TextView toStn;
 	 private TextView lableFromStn;
 	 private TextView lableToStn;
+	 private ListView listStation;
 	 private CheckBox cbClosesteStn;
 	 private GoogleApiClient mGoogleApiClient;
 	 private double latitude;
@@ -76,6 +78,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		lableFromStn = (TextView)findViewById(R.id.lableFrom);
 		lableToStn = (TextView)findViewById(R.id.lableTo);
 		cbClosesteStn = (CheckBox)findViewById(R.id.cbClosest);
+		listStation = (ListView)findViewById(R.id.listview);
 		
 		fromStation.setAdapter(adapter);
         toStation.setAdapter(adapter);
@@ -157,6 +160,26 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 					fromStation.setEnabled(true);
 			}
 		});
+		 
+		 listStation.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				TextView c = (TextView) view.findViewById(R.id.txtStation);
+				StationEnum station = Station.getStationInfo(c.getText().toString());
+				//Toast.makeText(getApplicationContext(), station.getName()+", "+station.getLatitude()+", "+station.getLongitude(), Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(getBaseContext(), MapActivity.class);
+				intent.putExtra("station_name", station.getName());
+				intent.putExtra("station_latitude", station.getLatitude());
+				intent.putExtra("station_longitude", station.getLongitude());
+				intent.putExtra("user_latitude", latitude);
+				intent.putExtra("user_longitude", longitude);
+				startActivity(intent);
+				
+			}
+		});
 	}
 	
 	private void calculate(String st1, String st2){
@@ -200,18 +223,8 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			arr[count++]=var.getName();
 		}
 	}
-	
-	private void createDataBase(){
-		
-		new Thread(new Runnable() {
-	        public void run() {
-	        	VanSkytrainDB vanSkyDB = new VanSkytrainDB(getApplicationContext());
-	    		SQLiteDatabase db = vanSkyDB.getReadableDatabase();
-	                }
-	            }).start();
-	}
 	private void setListView(ArrayList<StationEnum> route){
-		final ListView listStation = (ListView)findViewById(R.id.listview);
+		
 		
 		final StationArrayAdapter adapter= new StationArrayAdapter(this, route);
 		listStation.setAdapter(adapter);

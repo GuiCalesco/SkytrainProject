@@ -100,6 +100,18 @@ public class Station {
 		return station;
 	}
 	
+	public static StationEnum getStationInfo( String name){
+		StationEnum station = null;
+		for (StationEnum var : StationEnum.values()) {
+			if(var.getName().equals(name)){
+				station = var;
+				break;
+			}
+		}
+		
+		return station;
+	}
+	
 	public int getTimeAndPath(int stnCode1, int stnCode2){
 		GrafoStation gStation = new GrafoStation();
 		
