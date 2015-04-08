@@ -208,16 +208,23 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		}else{
 			stCode1 = Station.getStationId(st1);	
 		}
+		stCode2 = Station.getStationId(st2);
+		
+		if(stCode1==stCode2){
+			
+			Toast.makeText(this, "Please select a DESTINATION that is different from your DEPARTURE Station", Toast.LENGTH_LONG).show();
+			return;
+		}
 		
 		lableFromStn.setText("From: ");
 		lableToStn.setText(" To: ");
 		fromStn.setText(st1);
 		toStn.setText(st2);
-		stCode2 = Station.getStationId(st2);
+		
 		
 		if(stCode1!=-1 && stCode2!=-1){
 			timetxt.setText(calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
-			pricetxt.setText("$"+calcStn.getPrice());
+			pricetxt.setText("$"+calcStn.getPrice(stCode1, stCode2));
 			setListView(calcStn.getPath());
 		}else{
 			Toast.makeText(this, "No valid station was given", Toast.LENGTH_SHORT).show();

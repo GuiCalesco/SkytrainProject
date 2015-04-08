@@ -9,7 +9,7 @@ import com.projectskytrain.constants.StationEnum;
 
 public class Station {
 	
-	int [][] grafoStations = {{ -1, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
+	int [][] graphStations = {{ -1, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
 			{ 2, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
 			{ -1, 1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
 			{ -1, -1, 1, -1, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, 
@@ -114,7 +114,7 @@ public class Station {
 	public int getTimeAndPath(int stnCode1, int stnCode2){
 		GraphStation gStation = new GraphStation();
 		
-		int time = gStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2); 
+		int time = gStation.shortestPath(graphStations, numberOfStation, stnCode1, stnCode2); 
 		path = gStation.getPath();
 		return time;
 	}
@@ -128,7 +128,7 @@ public class Station {
 			return list;
 	}
 	
-	public double getPrice(){
+	public double getPrice(int origin, int destiny){
 		double price = 0.0;
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
@@ -157,8 +157,26 @@ public class Station {
 			break;
 		}
 		
-		return price;
+		return price+addAirPortFare(origin, destiny);
 	} 
+	
+	private double addAirPortFare(int origin, int destiny){
+		double price = 0.0;
+		if(origin == StationEnum.YVR_AIRPORT.getCode() || 
+			origin == StationEnum.SEA_ISLAND_CENTRE.getCode() || 
+			origin == StationEnum.TEMPLETON.getCode() ){
+			
+			if(destiny == StationEnum.YVR_AIRPORT.getCode() || 
+					destiny == StationEnum.SEA_ISLAND_CENTRE.getCode() || 
+					destiny == StationEnum.TEMPLETON.getCode() )
+				price = 0.0;
+			else
+				price = 5.0;
+		}
+			
+		return price;
+		
+	}
 	
 	
 	
