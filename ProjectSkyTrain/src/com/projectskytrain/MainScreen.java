@@ -68,7 +68,9 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 	     }       
 		
 		//Adapter for the ListView
-		ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
+		ArrayAdapter<String> adapterFrom =new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line,stnNames);
+		ArrayAdapter<String> adapterTo =new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,stnNames);
 		
 		fromStation = (AutoCompleteTextView)findViewById(R.id.txtFrom);
@@ -82,8 +84,8 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		cbClosesteStn = (CheckBox)findViewById(R.id.cbClosest);
 		listStation = (ListView)findViewById(R.id.listview);
 		
-		fromStation.setAdapter(adapter);
-        toStation.setAdapter(adapter);
+		fromStation.setAdapter(adapterFrom);
+        toStation.setAdapter(adapterTo);
 		search = (Button)findViewById(R.id.btnSearch);
 		seeMap = (Button)findViewById(R.id.btnMap);
 		
@@ -217,7 +219,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		}
 		
 		lableFromStn.setText("From: ");
-		lableToStn.setText(" To: ");
+		lableToStn.setText("To: ");
 		fromStn.setText(st1);
 		toStn.setText(st2);
 		
