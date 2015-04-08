@@ -28,7 +28,7 @@ public class MapActivity extends Activity {
 	   protected void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
 	      setContentView(com.example.projectskytrain.R.layout.map_layout);
-	      
+	      /*Gets information about the station that was sent from the MainScreen Activity*/
 	      Bundle extras = getIntent().getExtras();
 	      if (extras != null) {
 	          station_name = extras.getString("station_name");
@@ -36,20 +36,19 @@ public class MapActivity extends Activity {
 	          station_longitude = extras.getDouble("station_longitude");
 	          user_latitude = extras.getDouble("user_latitude");
 	          user_longitude = extras.getDouble("user_longitude");
-	          //Toast.makeText(getApplicationContext(), station_name+", "+station_latitude+", "+station_longitude, Toast.LENGTH_LONG).show();
 	          final LatLng stationLocation = new LatLng(station_latitude , station_longitude);
-	         final LatLng userLocation;
-	         // final LatLng userLocation = new LatLng(user_latitude , user_longitude);
+	          final LatLng userLocation;
 	          
 	          try { 
 	        	  if(googleMap == null) {
 	        		  googleMap = ((MapFragment) getFragmentManager().
 		              findFragmentById(com.example.projectskytrain.R.id.map)).getMap();
 		           }
+	        	  
 			       googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-
 			       Marker TP = googleMap.addMarker(new MarkerOptions().
 			       position(stationLocation).title(station_name));
+			       
 			       if(user_latitude!=0 && user_longitude!=0){
 			    	   userLocation = new LatLng(user_latitude, user_longitude);
 			    	   Marker TU = googleMap.addMarker(new MarkerOptions().

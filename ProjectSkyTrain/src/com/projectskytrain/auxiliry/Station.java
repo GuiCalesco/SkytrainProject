@@ -70,8 +70,7 @@ public class Station {
 	final int numberOfStation = 56;
 	
 	public Station(){
-		/*ReadData rd = new ReadData();
-		grafoStations = rd.getData();*/
+		
 		
 	}
 	
@@ -113,7 +112,7 @@ public class Station {
 	}
 	
 	public int getTimeAndPath(int stnCode1, int stnCode2){
-		GrafoStation gStation = new GrafoStation();
+		GraphStation gStation = new GraphStation();
 		
 		int time = gStation.shortestPath(grafoStations, numberOfStation, stnCode1, stnCode2); 
 		path = gStation.getPath();

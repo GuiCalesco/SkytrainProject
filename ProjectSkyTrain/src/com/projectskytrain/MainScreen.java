@@ -15,10 +15,8 @@ import com.projectskytrain.constants.StationEnum;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -31,7 +29,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
-import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,27 +47,32 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 	 private GoogleApiClient mGoogleApiClient;
 	 private double latitude;
 	 private double longitude;
-	 
-
-	
+	 private AutoCompleteTextView fromStation;
+	 private AutoCompleteTextView toStation;
+	 private Button search;
+	 private Button seeMap;
 	@Override
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		
-		getStation(stnNames);
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_screen);
 		
+		getStation(stnNames);
+		//Build connection with Google Service API.
 		if (checkPlayServices()) {             
 	        // Building the GoogleApi client
 	        	buildGoogleApiClient();        
 	     }       
-	
+		
+		//Adapter for the ListView
 		ArrayAdapter<String> adapter =new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,stnNames);
-		final AutoCompleteTextView fromStation = (AutoCompleteTextView)findViewById(R.id.txtFrom);
-		final AutoCompleteTextView toStation = (AutoCompleteTextView)findViewById(R.id.txtTo);
+		
+		fromStation = (AutoCompleteTextView)findViewById(R.id.txtFrom);
+		toStation = (AutoCompleteTextView)findViewById(R.id.txtTo);
 		timetxt = (TextView)findViewById(R.id.txtTime);
 		pricetxt = (TextView)findViewById(R.id.txtPrice);
 		fromStn = (TextView)findViewById(R.id.txtFromStn);
@@ -82,10 +84,10 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		
 		fromStation.setAdapter(adapter);
         toStation.setAdapter(adapter);
-		Button search = (Button)findViewById(R.id.btnSearch);
-		Button seeMap= (Button)findViewById(R.id.btnMap);
+		search = (Button)findViewById(R.id.btnSearch);
+		seeMap = (Button)findViewById(R.id.btnMap);
 		
-		
+		//Button Search onClick event
 		 search.setOnClickListener(new OnClickListener() {
 		
 			@Override
@@ -98,6 +100,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			}
 		}) ;
 		
+		 //Button See Map onClick event
 		seeMap.setOnClickListener( new OnClickListener() {
 			
 			@Override
@@ -107,6 +110,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			}
 		});
 		 
+		//Hides the soft keyboard when the user taps somewhere on the screen 
 		 fromStation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			
 			@Override
@@ -117,7 +121,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 				}
 			}
 		});
-		 
+		//Hides the soft keyboard when the user taps somewhere on the screen 
 		 toStation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 				
 				@Override
@@ -129,6 +133,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 				}
 			});
 		 
+		 //Show the List of Station when the user taps on the textview 
 		 fromStation.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -138,6 +143,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			}
 		});
 		 
+		 //Show the List of Station when the user taps on the textview 
 		 toStation.setOnClickListener(new OnClickListener() {
 				
 				@Override
@@ -147,6 +153,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 				}
 			});
 		 
+		 //Disabled the from textview when the user checks the Closest station checkbox
 		 cbClosesteStn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
@@ -161,6 +168,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			}
 		});
 		 
+		 //Starts the MapActivity sending information about the station
 		 listStation.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -181,11 +189,11 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			}
 		});
 	}
-	
+	//Calculates the best route
 	private void calculate(String st1, String st2){
 		int stCode1, stCode2;
 		Station calcStn= new Station();
-		
+		//If the closest station checkbox is checked find it
 		if(cbClosesteStn.isChecked()){
 			if(mGoogleApiClient!=null){
 				stCode1 = getClosestStation();
@@ -200,11 +208,13 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		}else{
 			stCode1 = Station.getStationId(st1);	
 		}
+		
 		lableFromStn.setText("From: ");
 		lableToStn.setText(" To: ");
 		fromStn.setText(st1);
 		toStn.setText(st2);
 		stCode2 = Station.getStationId(st2);
+		
 		if(stCode1!=-1 && stCode2!=-1){
 			timetxt.setText(calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
 			pricetxt.setText("$"+calcStn.getPrice());
@@ -215,7 +225,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		
 			
 	}
-
+	//Gets a array if station names
 	private void getStation( String [] arr){
 		
 		int count=0;
@@ -223,14 +233,16 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			arr[count++]=var.getName();
 		}
 	}
+	
+	//Sets the array adapter to the listView
 	private void setListView(ArrayList<StationEnum> route){
-		
-		
+	
 		final StationArrayAdapter adapter= new StationArrayAdapter(this, route);
 		listStation.setAdapter(adapter);
 		
 	}
 	
+	//Calculates the closest station
 	private int getClosestStation(){
 		int code = -1;
 		double closeste = -1;
@@ -258,6 +270,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		return code; 
 	}
 	
+	//Checks for google play services
 	private boolean checkPlayServices() {        
     	int resultCode = GooglePlayServicesUtil                
     			.isGooglePlayServicesAvailable(this);        
@@ -276,6 +289,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
     	return true;    
     }
 	
+	//Gets user current location
 	private boolean setLocation(){
 		Location mLastLocation = LocationServices.FusedLocationApi                
     			.getLastLocation(mGoogleApiClient);         
@@ -291,6 +305,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		}
 	}
 	
+	//Build Google Client Api
 	protected synchronized void buildGoogleApiClient() {        
     	mGoogleApiClient = new GoogleApiClient.Builder(this)                
     	.addConnectionCallbacks(this)                
@@ -335,6 +350,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		checkPlayServices();
 	}
 	
+	//Hides soft keyBoard 
 	public void hideKeyboard(View v){
 		InputMethodManager inputManager = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
 		inputManager.hideSoftInputFromWindow(v.getWindowToken(),0);

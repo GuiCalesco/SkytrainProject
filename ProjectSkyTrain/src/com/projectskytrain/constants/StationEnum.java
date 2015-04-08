@@ -1,5 +1,5 @@
 package com.projectskytrain.constants;
-
+/*Station Info: (code, name, line, zone, latitude, longitude)*/
 public enum StationEnum{
 	
 	WATERFRONT(0, "Waterfront", Line.EXPO_AND_MILLENNIUM_LINE, Zone.ZONE_1,49.285687,-123.11177299999997),

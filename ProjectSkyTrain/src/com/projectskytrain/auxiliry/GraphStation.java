@@ -2,7 +2,7 @@
 
 package com.projectskytrain.auxiliry;
 import java.util.*;
-public class GrafoStation{
+public class GraphStation{
 	static class Member
 	{
 		public int distance; 
@@ -11,7 +11,7 @@ public class GrafoStation{
 	 
 	 LinkedList<Integer> path;
 	
-	 public GrafoStation(){
+	 public GraphStation(){
 		
 	 }
 	public int shortestPath(int [][] grafo, int n, int origin, int destiny){
@@ -66,21 +66,7 @@ public class GrafoStation{
 		}
 
 	}
-	
-	private void printArray(Member[] arr, int n){
-		for(int i = 0; i < n; i++){
-			System.out.print("From: "+arr[i].from+" - Dist: "+arr[i].distance+"/ ");
-		}
-		System.out.println("");
-	}
-	
-	private void printList(LinkedList<Integer> list){
-		for(int i = 0; i < list.size(); i++)
-			System.out.print(list.get(i)+"- ");
-			
-		System.out.println("");
-	}
-	
+
 	private  LinkedList<Integer> getPath(Member[] arr, int origin, int destiny){
 	
 		LinkedList<Integer> path = new LinkedList<Integer>();
@@ -91,7 +77,6 @@ public class GrafoStation{
 			path.addFirst(arr[path.getFirst()].from);
 		}
 		
-		printList(path);
 		return path;
 		
 	}
