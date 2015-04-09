@@ -12,7 +12,10 @@ public class SkytrainLine extends Activity {
 		setContentView(R.layout.skytrain_map);
 		
 		final WebView line = (WebView)findViewById(R.id.webView1);
+		line.setInitialScale(75);
+		line.getSettings().setBuiltInZoomControls(true);
 		
+
 		String data = "<body>" + "<img src=\"skytrain_line.png\"/></body>";
 
 		line.loadDataWithBaseURL("file:///android_res/drawable/",data , "text/html", "utf-8",null);

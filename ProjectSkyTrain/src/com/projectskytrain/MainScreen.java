@@ -228,6 +228,7 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 			timetxt.setText(calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
 			pricetxt.setText("$"+calcStn.getPrice(stCode1, stCode2));
 			setListView(calcStn.getPath());
+			Toast.makeText(this, "Tap on the station name to show its location", Toast.LENGTH_SHORT).show();
 		}else{
 			cleanInfo();
 			Toast.makeText(this, "No valid station was given", Toast.LENGTH_SHORT).show();
