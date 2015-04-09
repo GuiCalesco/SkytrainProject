@@ -212,23 +212,24 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 		}
 		stCode2 = Station.getStationId(st2);
 		
-		if(stCode1==stCode2){
-			
-			Toast.makeText(this, "Please select a DESTINATION that is different from your DEPARTURE Station", Toast.LENGTH_LONG).show();
-			return;
-		}
-		
-		lableFromStn.setText("From: ");
-		lableToStn.setText("To: ");
-		fromStn.setText(st1);
-		toStn.setText(st2);
-		
-		
 		if(stCode1!=-1 && stCode2!=-1){
+			if(st1.contains(st2) || st2.contains(st1)){
+				
+				Toast.makeText(this, "Please select a DESTINATION that is different from your DEPARTURE Station", Toast.LENGTH_LONG).show();
+				cleanInfo();
+				return;
+			}
+			
+			lableFromStn.setText("From: ");
+			lableToStn.setText("To: ");
+			fromStn.setText(st1);
+			toStn.setText(st2);
+			
 			timetxt.setText(calcStn.getTimeAndPath(stCode1, stCode2)+" minutes");
 			pricetxt.setText("$"+calcStn.getPrice(stCode1, stCode2));
 			setListView(calcStn.getPath());
 		}else{
+			cleanInfo();
 			Toast.makeText(this, "No valid station was given", Toast.LENGTH_SHORT).show();
 		}
 		
@@ -360,9 +361,21 @@ public class MainScreen extends Activity implements ConnectionCallbacks, OnConne
 	}
 	
 	//Hides soft keyBoard 
-	public void hideKeyboard(View v){
+	private void hideKeyboard(View v){
 		InputMethodManager inputManager = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
 		inputManager.hideSoftInputFromWindow(v.getWindowToken(),0);
+	}
+	
+	private void cleanInfo(){
+		lableFromStn.setText("");
+		lableToStn.setText("");
+		fromStn.setText("");
+		toStn.setText("");
+		timetxt.setText("");
+		pricetxt.setText("");
+		
+		listStation.setAdapter(null);
+		
 	}
 	
 	
