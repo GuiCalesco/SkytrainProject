@@ -47,7 +47,7 @@ public class MapActivity extends Activity {
 	        	  
 			       googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 			       Marker TP = googleMap.addMarker(new MarkerOptions().
-			       position(stationLocation).title(station_name));
+			       position(stationLocation).title(station_name+" Station"));
 			       
 			       if(user_latitude!=0 && user_longitude!=0){
 			    	   userLocation = new LatLng(user_latitude, user_longitude);
